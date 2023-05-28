@@ -6,7 +6,7 @@ task('verify:contract', 'Verify deployed contract')
   .addParam('contract')
   .setAction(async ({ file, contract }, hre) => {
     try {
-      const contractAddress = fs.readFileSync(`scripts/address/${hre.network.name}/mainContract.json`)
+      const contractAddress = fs.readFileSync(`scripts/address/${hre.network.name}/${contract}.json`)
       const addressData = JSON.parse(contractAddress.toString())
       console.log(addressData.main)
       await hre.run('verify:verify', {

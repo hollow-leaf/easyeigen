@@ -10,6 +10,8 @@
     "node": "hardhat node",
     "deploy": "hardhat deploy:contract",
     "verify": "hardhat verify:contract",
+    "deploy:SimpleStaker": "hardhat deploy:contract --contract SimpleStaker --network tevmos",
+    "deploy:EasySlasher": "hardhat deploy:contract --contract EasySlasher --network tevmos",
     "eslint": "eslint -c .eslintrc \"./**/*.ts\"",
     "eslint:fix": "eslint --fix \"./src/*.ts\""
   },
