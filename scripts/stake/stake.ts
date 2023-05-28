@@ -16,25 +16,24 @@ async function main () {
 
   await sleep(5000)
 
-  const nodeStake = 'evmos1lngjsefg92rpyjk9860wnm6mspkz9x2g9q8k8z'
-  const ethAmt = ethers.utils.parseEther('1')
-  const staking = await stakeContract.stakeTokens(nodeStake, ethAmt)
+  const nodeStake = 'evmosvaloper10t6kyy4jncvnevmgq6q2ntcy90gse3yxa7x2p4'
+  const etherAmount = '0.1'
+  const ethAmt = ethers.utils.parseEther(etherAmount)
+  const stakingEstimateGas = await stakeContract.estimateGas.stakeTokens(nodeStake, ethAmt)
+  const staking = await stakeContract.stakeTokens(nodeStake, ethAmt, { gasLimit: stakingEstimateGas })
   await staking.wait()
-
-  console.log('Staked 1 EVMOS')
-
-  await sleep(5000)
-
-  const withdrawRewards = await stakeContract.withdrawRewards(nodeStake)
-  console.log('Withdrew rewards', withdrawRewards)
+  console.log(`Staked ${etherAmount} EVMOS`)
 
   await sleep(5000)
 
-  const delegation = await stakeContract.delegation(nodeStake)
+  const delegation = await stakeContract.getDelegation(nodeStake)
   console.log('Delegation', delegation)
 
-  const rewards = await stakeContract.getDelegateRewards(nodeStake)
+  const rewards = await stakeContract.getDelegationRewards(nodeStake)
   console.log('Rewards', rewards)
+
+  const withdrawRewards = await stakeContract.withdrawRewards(nodeStake)
+  console.log('withdrawRewards', withdrawRewards)
 }
 
 main().catch((e) => { console.error(e) })

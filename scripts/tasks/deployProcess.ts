@@ -15,7 +15,7 @@ task('deploy:contract', 'Deploy contract')
       main: deployContract.address,
     }
     const addressData = JSON.stringify(address)
-    writeFileSync(`scripts/address/${hre.network.name}/`, 'mainContract.json', addressData)
+    writeFileSync(`scripts/address/${hre.network.name}/`, `${contract}.json`, addressData)
 
     await deployContract.deployed()
   },
