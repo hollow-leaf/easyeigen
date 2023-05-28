@@ -4,14 +4,22 @@
 
 EasyEigenFactory is an EVMOS-extension bases restaking protocal.
 
-```
-npm run compile
-```
 
-```
+### Stake
+
+``` bash
+# deploy
 npm run deploy:SimpleStaker
+
+# stake
+npm run stake
 ```
 
-```
-npm run stake
+### Slash
+``` bash
+# deploy
+npm run deploy:EasySlasher
+
+# slash
+npm run slash
 ```

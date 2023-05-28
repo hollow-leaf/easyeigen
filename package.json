@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "stake": "ts-node scripts/stake/stake.ts",
+    "slash": "ts-node scripts/slash/slash.ts",
     "clean": "rm -rf ./artifacts ./cache ./typechain",
     "compile": "hardhat compile",
     "node": "hardhat node",
