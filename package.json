@@ -1,0 +1,38 @@
+{
+  "name": "easyeigen",
+  "version": "0.0.1",
+  "description": "EVMOS extensions restaking easy Proof of Concept",
+  "main": "index.js",
+  "scripts": {
+    "clean": "rm -rf ./artifacts ./cache ./typechain",
+    "compile": "hardhat compile",
+    "node": "hardhat node",
+    "deploy": "hardhat deploy:contract",
+    "verify": "hardhat verify:contract",
+    "eslint": "eslint -c .eslintrc \"./**/*.ts\"",
+    "eslint:fix": "eslint --fix \"./src/*.ts\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kidneyweakx/easyeigen.git"
+  },
+  "author": "kidneyweakx",
+  "license": "LGPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/kidneyweakx/easyeigen/issues"
+  },
+  "homepage": "https://github.com/kidneyweakx/easyeigen#readme",
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^2.0.2",
+    "@nomiclabs/hardhat-ethers": "^2.2.3",
+    "@nomiclabs/hardhat-etherscan": "^3.1.7",
+    "@openzeppelin/contracts": "^4.9.0",
+    "dotenv": "^16.0.3",
+    "ericlint": "^1.1.12",
+    "ethers": "^5.7.2",
+    "hardhat": "^2.14.0",
+    "hardhat-gas-reporter": "^1.0.9",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.0.4"
+  }
+}
