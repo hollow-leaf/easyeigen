@@ -4,6 +4,7 @@
   "description": "EVMOS extensions restaking easy Proof of Concept",
   "main": "index.js",
   "scripts": {
+    "stake": "ts-node scripts/stake/stake.ts",
     "clean": "rm -rf ./artifacts ./cache ./typechain",
     "compile": "hardhat compile",
     "node": "hardhat node",
