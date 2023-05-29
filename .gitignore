@@ -145,3 +145,7 @@ typechain
 typechain/*
 test/__snapshots__
 scripts/address/*
+
+# hardhat circom
+circuits/*.r1cs
+circuits/*.vkey.json

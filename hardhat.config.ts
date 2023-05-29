@@ -4,6 +4,7 @@ import { NetworkUserConfig } from 'hardhat/types'
 import '@nomiclabs/hardhat-ethers'
 import '@nomiclabs/hardhat-etherscan'
 import '@nomicfoundation/hardhat-toolbox'
+import 'hardhat-circom'
 
 import { config as dotenvConfig } from 'dotenv'
 import { resolve } from 'path'
@@ -91,7 +92,14 @@ const config: HardhatUserConfig = {
     tests: './test',
   },
   solidity: {
-    version: '0.8.17',
+    compilers: [
+      {
+        version: '0.8.17',
+      },
+      {
+        version: '0.6.11',
+      },
+    ],
     settings: {
       metadata: {
         // Not including the metadata hash
@@ -106,6 +114,15 @@ const config: HardhatUserConfig = {
       },
     },
   },
+  circom: {
+    inputBasePath: './circuits',
+    ptau: 'https://hermez.s3-eu-west-1.amazonaws.com/powersOfTau28_hez_final_15.ptau',
+    circuits: [
+      {
+        name: 'slash',
+      },
+    ],
+  },
   etherscan: {
     apiKey: {
       arbitrumOne: process.env.ARBISCAN_API_KEY || '',
@@ -118,7 +135,7 @@ const config: HardhatUserConfig = {
       polygon: process.env.POLYGONSCAN_API_KEY || '',
       optimisticGoerli: process.env.OPTIMISM_API_KEY || '',
       polygonMumbai: process.env.POLYGONSCAN_API_KEY || '',
-      tevmos: 'abc',
+      tevmos: process.env.ESCAN_API_KEY || '',
     },
     customChains: [{
       network: 'tevmos',
