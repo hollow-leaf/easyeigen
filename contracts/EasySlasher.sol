@@ -17,7 +17,6 @@ contract EasySlasher is Ownable {
         uint[2] a;
         uint[2][2] b;
         uint[2] c;
-        uint[4] input;
     }
 
     mapping(address => bool) internal banList;
@@ -62,12 +61,12 @@ contract EasySlasher is Ownable {
         }
     }
 
-    function verifyProof(ProofData memory proofData) internal view returns (bool) {
+    function verifyProof(ProofData memory proofData, uint[4] memory input) internal view returns (bool) {
         return slashVerifier.verifyProof(
             proofData.a,
             proofData.b,
             proofData.c,
-            proofData.input
+            input
         );
     }
 }
