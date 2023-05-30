@@ -2,8 +2,9 @@
 pragma solidity >=0.8.17;
 
 import "../node_modules/@openzeppelin/contracts/token/ERC20/IERC20.sol";
+import "./EasySlasher.sol";
 
-contract Restake {
+contract Restake is EasySlasher {
     IERC20 public eevmos;
     constructor(address _eevmos) {
         eevmos = IERC20(_eevmos);

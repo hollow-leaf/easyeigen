@@ -27,6 +27,7 @@ contract Staker is ERC20{
     }
 
     function deposit() payable external {
+        approveRequiredMethods();
         deposits[msg.sender] += msg.value;
     }
 
@@ -64,6 +65,7 @@ contract Staker is ERC20{
     ) public view returns (uint256 shares, Coin memory balance) {
         return STAKING_CONTRACT.delegation(msg.sender, _validatorAddr);
     }
+
     function getDelegationRewards(
         string memory _validatorAddr
     ) public view returns (DecCoin[] memory rewards) {

@@ -1,7 +1,3 @@
-export const stakeABI = require('../artifacts/contracts/SimpleStaker.sol/SimpleStaker.json')
-
-export const stakeAddress = require('../scripts/address/tevmos/SimpleStaker.json')
-
 export const stakerABI = require('../artifacts/contracts/Staker.sol/Staker.json')
 
 export const stakerAddress = require('../scripts/address/tevmos/Staker.json')
