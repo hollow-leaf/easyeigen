@@ -14,6 +14,7 @@
     "node": "hardhat node",
     "deploy": "hardhat deploy:contract",
     "verify": "hardhat verify:contract",
+    "deploy:zk": "hardhat deploy:contract --contract Verifier --network tevmos",
     "deploy:Staker": "hardhat deploy:contract --contract Staker --network tevmos",
     "deploy:EasySlasher": "hardhat deploy:contract --contract EasySlasher --network tevmos",
     "circom:dev": "hardhat circom --deterministic --debug --verbose",
