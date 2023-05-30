@@ -3,8 +3,22 @@
 pragma solidity >=0.8.17;
 
 import "../node_modules/@openzeppelin/contracts/access/Ownable.sol";
+import "./interface/ISlashVerifier.sol";
 
 contract EasySlasher is Ownable {
+
+    ISlashVerifier public slashVerifier;
+
+    constructor(address _slashVerifierAddress) {
+        slashVerifier = ISlashVerifier(_slashVerifierAddress);
+    }
+
+    struct ProofData {
+        uint[2] a;
+        uint[2][2] b;
+        uint[2] c;
+        uint[4] input;
+    }
 
     mapping(address => bool) internal banList;
 
@@ -46,5 +60,14 @@ contract EasySlasher is Ownable {
             banList[staker] = false;
             emit UnbanStaker(staker, address(this));
         }
+    }
+
+    function verifyProof(ProofData memory proofData) internal view returns (bool) {
+        return slashVerifier.verifyProof(
+            proofData.a,
+            proofData.b,
+            proofData.c,
+            proofData.input
+        );
     }
 }

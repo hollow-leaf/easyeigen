@@ -41,13 +41,20 @@ contract Staker is ERC20{
         _mint(msg.sender, _amount);
     }
 
-    function unstakeTokens(
+    function unstaking(
       string memory _validatorAddr, 
       uint256 _amount
     ) public returns (int64 completionTime) {
-        require(balanceOf(msg.sender) >= _amount, "Insufficient balance");
+        require(balanceOf(msg.sender) >= _amount, "Insufficient EEVMOS balance");
         _burn(msg.sender, _amount);
+        deposits[msg.sender] += _amount;
         return STAKING_CONTRACT.undelegate(address(this), _validatorAddr, _amount);
+    }
+
+    function withdraw(uint256 _amount) public {
+        require(deposits[msg.sender] >= _amount, "Insufficient EVMOS balance");
+        deposits[msg.sender] -= _amount;
+        payable(msg.sender).transfer(_amount);
     }
 
     function withdrawRewards(

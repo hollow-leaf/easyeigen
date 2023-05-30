@@ -6,8 +6,10 @@ import "./EasySlasher.sol";
 
 contract Restake is EasySlasher {
     IERC20 public eevmos;
-    constructor(address _eevmos) {
+
+    constructor(address _eevmos, address _slashVerifierAddress) EasySlasher(_slashVerifierAddress) {
         eevmos = IERC20(_eevmos);
+        slashVerifier = ISlashVerifier(_slashVerifierAddress);
     }
 
     function register() public {
@@ -15,5 +17,7 @@ contract Restake is EasySlasher {
         eevmos.transferFrom(msg.sender, address(this), 1* 10 ** 18);
     }
 
-    
+    // function slash (ProofData memory proofData) external {      
+    //     require(verifyProof(proofData), "Verification Failed");
+    // }
 }

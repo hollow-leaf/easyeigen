@@ -12,26 +12,56 @@ async function main () {
   const stakeContract = new ethers.Contract(stakerAddress.main, stakerABI.abi, wallet)
 
   const nodeStake = 'evmosvaloper10t6kyy4jncvnevmgq6q2ntcy90gse3yxa7x2p4'
-  const etherAmount = '0.1'
+  const etherAmount = '0.5'
   const ethAmt = ethers.utils.parseEther(etherAmount)
 
-  const deposit = await stakeContract.deposit({
-    value: ethAmt,
-  })
+  // console.log('---------- Deposit & Staking ----------')
+  // // Deposit EVMOS
+  // let deposit = await stakeContract.deposit({ value: ethAmt })
+  // await deposit.wait()
+  // console.log(`Deposit ${etherAmount} EVMOS success`)
+
+  // let eevmosBalance = await stakeContract.balanceOf(await wallet.getAddress())
+  // console.log('EEVMOS Balance', ethers.utils.formatEther(eevmosBalance.toString()), '(before staking)')
+  // await sleep(12000)
+
+  // // Stake EVMOS then get EEVMOS
+  // const estStakeDeposit = await stakeContract.estimateGas.staking(nodeStake, ethAmt)
+  // const stakeDeposit = await stakeContract.staking(nodeStake, ethAmt, { gasLimit: estStakeDeposit })
+  // await stakeDeposit.wait()
+  // console.log(`Stake ${etherAmount} EVMOS success`)
+
+  // eevmosBalance = await stakeContract.balanceOf(await wallet.getAddress())
+  // console.log('EEVMOS Balance', ethers.utils.formatEther(eevmosBalance.toString()), '(after staking)')
+  // await sleep(12000)
+
+  // // Unstake EVMOS then burn EEVMOS
+  // const estUnstakeDeposit = await stakeContract.estimateGas.unstaking(nodeStake, ethAmt)
+  // console.log('test')
+  // const unstakeDeposit = await stakeContract.unstaking(nodeStake, ethAmt, { gasLimit: estUnstakeDeposit })
+  // await unstakeDeposit.wait()
+  // console.log(`Unstake ${etherAmount} EVMOS success`)
+
+  // eevmosBalance = await stakeContract.balanceOf(await wallet.getAddress())
+  // console.log('EEVMOS Balance', ethers.utils.formatEther(eevmosBalance.toString()), '(after unstaking)')
+
+  console.log('---------- Deposit & Withdraw ----------')
+  let evmosBalance = await evmos.getBalance(await wallet.getAddress())
+  console.log('EVMOS Balance', ethers.utils.formatEther(evmosBalance.toString()), '(before withdraw)')
+
+  // Deposit EVMOS
+  const deposit = await stakeContract.deposit({ value: ethAmt })
   await deposit.wait()
   console.log(`Deposit ${etherAmount} EVMOS success`)
+  evmosBalance = await evmos.getBalance(await wallet.getAddress())
+  console.log('EVMOS Balance', ethers.utils.formatEther(evmosBalance.toString()), '(after deposit)')
 
-  let balance = await stakeContract.balanceOf(await wallet.getAddress())
-  console.log('EEVMOS Balance', ethers.utils.formatEther(balance.toString()), 'before staking')
-  await sleep(12000)
-
-  const estStakeDeposit = await stakeContract.estimateGas.staking(nodeStake, ethAmt)
-  const stakeDeposit = await stakeContract.staking(nodeStake, ethAmt, { gasLimit: estStakeDeposit })
-  await stakeDeposit.wait()
-  console.log(`Stake deposit ${etherAmount} EVMOS success`)
-
-  balance = await stakeContract.balanceOf(await wallet.getAddress())
-  console.log('EEVMOS Balance', ethers.utils.formatEther(balance.toString()), '(after staking)')
+  // Withdraw EVMOS from deposit
+  const withdraw = await stakeContract.withdraw(ethAmt)
+  await withdraw.wait()
+  console.log(`Withdraw ${etherAmount} EVMOS success`)
+  evmosBalance = await evmos.getBalance(await wallet.getAddress())
+  console.log('EVMOS Balance', ethers.utils.formatEther(evmosBalance.toString()), '(after withdraw)')
 }
 
 main().catch((e) => { console.error(e) })
