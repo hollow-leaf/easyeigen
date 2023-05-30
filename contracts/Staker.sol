@@ -9,7 +9,7 @@ import "../node_modules/@openzeppelin/contracts/token/ERC20/extensions/ERC20Burn
 contract Staker is ERC20{
     string[] private stakingMethods = [MSG_DELEGATE];
     string[] private distributionMethods = [MSG_WITHDRAW_DELEGATOR_REWARD];
-
+    mapping (address => uint256) public deposits;
     constructor () ERC20("EEVMOS", "EE") {}
 
     function approveRequiredMethods() public {
@@ -26,16 +26,23 @@ contract Staker is ERC20{
         require(success, "Failed to approve withdraw delegator rewards method");
     }
 
-    function stakeTokens(
-        string memory _validatorAddr
-    ) public payable returns (int64 completionTime) {
-        _mint(msg.sender, msg.value);
-        approveRequiredMethods();
-        return STAKING_CONTRACT.delegate(address(this), _validatorAddr, msg.value);
+    function deposit() payable external {
+        deposits[msg.sender] += msg.value;
+    }
+
+    function staking (
+        string memory _validatorAddr,
+        uint256 _amount
+    ) public returns (int64 completionTime){
+        require(_amount <= deposits[msg.sender], "Insufficient balance");
+        deposits[msg.sender] -= _amount;
+        completionTime = STAKING_CONTRACT.delegate(address(this), _validatorAddr, _amount);
+        _mint(msg.sender, _amount);
     }
 
     function unstakeTokens(
-      string memory _validatorAddr, uint256 _amount
+      string memory _validatorAddr, 
+      uint256 _amount
     ) public returns (int64 completionTime) {
         require(balanceOf(msg.sender) >= _amount, "Insufficient balance");
         _burn(msg.sender, _amount);
@@ -64,4 +71,5 @@ contract Staker is ERC20{
             DISTRIBUTION_CONTRACT.delegationRewards(msg.sender, _validatorAddr);
     }
     receive() external payable {}
+    fallback() external payable {}
 }
