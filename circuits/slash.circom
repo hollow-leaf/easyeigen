@@ -9,7 +9,7 @@ template slash(levels) {
   signal input path[levels];
   signal input idx[levels];
   signal input crossAmount;
-  signal input sender;
+  signal input receiver;
   
   // leaf index
   component leafIndexNum = Bits2Num(levels);
@@ -17,8 +17,9 @@ template slash(levels) {
       leafIndexNum.in[i] <== idx[i];
   }
   // 1. verify user account exist
-  component userLeaf = Poseidon(1);
+  component userLeaf = Poseidon(2);
   userLeaf.inputs[0] <== crossAmount;
+  userLeaf.inputs[1] <== receiver;
 
   // 2. verify user account include
   component userTree = treeCheck(levels);
@@ -30,4 +31,4 @@ template slash(levels) {
   }
 }
 
-component main{public [accountRoot, sender, borrowAmount]} = cred(3);
+component main{public [accountRoot, crossAmount, receiver]} = slash(3);

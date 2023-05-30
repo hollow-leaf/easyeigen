@@ -24,3 +24,8 @@ const anyToBigNumber = (input: any) => {
   }
 }
 
+async function main() {
+  
+}
+
+main()
