@@ -7,6 +7,8 @@
     "stake": "ts-node scripts/stake/stake.ts",
     "stakeEE": "ts-node scripts/stake/stakeEE.ts",
     "slash": "ts-node scripts/slash/slash.ts",
+    "zk:proof": "ts-node scripts/zk/proof.ts",
+    "zk:testProof": "ts-node scripts/zk/testHash.ts",
     "clean": "rm -rf ./artifacts ./cache ./typechain",
     "compile": "hardhat compile",
     "node": "hardhat node",

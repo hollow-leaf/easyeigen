@@ -14,4 +14,6 @@ contract Restake is EasySlasher {
         require(eevmos.balanceOf(msg.sender) >= 1 * 10 ** 18, "You need at least 1 EEVMOS to register");
         eevmos.transferFrom(msg.sender, address(this), 1* 10 ** 18);
     }
+
+    
 }
