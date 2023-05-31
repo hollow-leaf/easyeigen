@@ -1,0 +1,1 @@
+body{background:#000;margin:0}.spin--icon{animation:spinspin .8s linear infinite}@keyframes spinspin{0%{transform:rotate(0deg)}to{transform:rotate(1turn)}}input::-webkit-inner-spin-button,input::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}input[type=number]{-moz-appearance:textfield}
