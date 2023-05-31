@@ -2,17 +2,18 @@
 pragma solidity >=0.8.17;
 
 import "../node_modules/@openzeppelin/contracts/token/ERC20/IERC20.sol";
-// import "./EasySlasher.sol";
 import "../node_modules/@openzeppelin/contracts/access/Ownable.sol";
 import "./interface/ISlashVerifier.sol";
+
 contract Restake is Ownable {
     IERC20 public eevmos;
 
     mapping(address => uint[4]) public relayProofs;
         ISlashVerifier public slashVerifier;
 
-    constructor(address _slashVerifierAddress) {
+    constructor(address _slashVerifierAddress, address _eevmos) {
         slashVerifier = ISlashVerifier(_slashVerifierAddress);
+        eevmos = IERC20(_eevmos);
     }
 
     struct ProofData {
@@ -74,6 +75,7 @@ contract Restake is Ownable {
 
     mapping(address => bool) public registered;
     function register() public {
+        require(!registered[msg.sender], "You are already registered");
         require(eevmos.balanceOf(msg.sender) >= 1 * 10 ** 18, "You need at least 1 EEVMOS to register");
         eevmos.transferFrom(msg.sender, address(this), 1* 10 ** 18);
         registered[msg.sender] = true;
@@ -82,6 +84,7 @@ contract Restake is Ownable {
     function quit() public {
         require(registered[msg.sender], "You need to register first");
         registered[msg.sender] = false;
+        eevmos.approve(address(this), 1* 10 ** 18);
         eevmos.transferFrom(address(this), msg.sender, 1* 10 ** 18); 
     }
     
@@ -93,6 +96,13 @@ contract Restake is Ownable {
     function slash (ProofData memory proofData, address relayer) external {      
         require(verifyProof(proofData, relayProofs[relayer]), "Verification Failed");
         registered[relayer] = false;
+        _banStaker(relayer);
         registered[msg.sender] = true;
+    }
+
+    // query
+
+    function getRelayer(address relayer) public view returns (uint[4] memory) {
+        return relayProofs[relayer];
     }
 }

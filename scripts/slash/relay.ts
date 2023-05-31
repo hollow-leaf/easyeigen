@@ -2,7 +2,6 @@ import { BytesLike, ethers } from 'ethers'
 import { config as dotenvConfig } from 'dotenv'
 import { restakerABI, restakerAddress } from '../config'
 import { resolve } from 'path'
-import { generateProof } from '../zk/proof'
 dotenvConfig({ path: resolve(__dirname, '../../.env') })
 
 async function main () {
@@ -11,24 +10,24 @@ async function main () {
   const wallet = new ethers.Wallet(process.env.PRIVATE_KEY as BytesLike, evmos)
   const restakeContract = new ethers.Contract(restakerAddress.main, restakerABI.abi, wallet)
 
-  const value = await restakeContract.getRelayer(await wallet.getAddress())
-  console.log(value)
- 
+  const relay = await restakeContract.relay(wallet.address, wallet.address, 50, 1) // fake proof
+  await relay.wait()
+  console.log('Relay success')
+
   const circuitInputs = {
-    relayer: value[0].toString(),
-    receiver: value[1].toString(),
-    amount: value[2].toString(),
-    hash: value[3].toString(),
+    relayer: `${relayer}`,
+    receiver: `${receiver}`,
+    amount: `${amount}`,
+    hash: `0x1`,
   }
+
   const proofData = await generateProof(
     circuitInputs,
-    'circuits/slash.wasm',
-    'circuits/slash.zkey',
+    WASM_FILE_PATH,
+    ZKEY_FILE_PATH
   )
-
-  const slash = await restakeContract.slash(proofData, wallet.address) // fake proof
-  await slash.wait()
-  console.log('Slash success')
 }
 
-main().catch((e) => { console.error(e) })
+main().catch((err) => {
+  console.error(err)
+})
