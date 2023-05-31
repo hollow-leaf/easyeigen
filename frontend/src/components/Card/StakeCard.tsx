@@ -9,7 +9,6 @@ import { useStEvmosContractAddressHook } from "../../hooks/useContractAddress.ho
 import { ProcessButton } from "../Button/ProcessButton";
 import { BigNumber } from "ethers";
 import { CurrentBalanceDisplay } from "../Display/CurrentBalanceDisplay";
-import { RestakedBalanceDisplay } from "../Display/ReStakedBalanceDisplay";
 import { GetMaxBalanceDisplay } from "../Display/GetMaxBalanceDisplay";
 import { SetProcessDisplay } from "../Display/SetProcessDisplay";
 import { StakedBalanceDisplay } from "../Display/StakedBalanceDisplay";

@@ -5,13 +5,7 @@ import { prepareWriteContract, writeContract, waitForTransaction } from '@wagmi/
 import { stakerABI } from "../../contracts/staker";
 import Image from "next/image";
 import { useStEvmosContractAddressHook } from "../../hooks/useContractAddress.hook";
-import { ProcessButton } from "../Button/ProcessButton";
 import { BigNumber } from "ethers";
-import { CurrentBalanceDisplay } from "../Display/CurrentBalanceDisplay";
-import { RestakedBalanceDisplay } from "../Display/ReStakedBalanceDisplay";
-import { GetMaxBalanceDisplay } from "../Display/GetMaxBalanceDisplay";
-import { SetProcessDisplay } from "../Display/SetProcessDisplay";
-import { StakedBalanceDisplay } from "../Display/StakedBalanceDisplay";
 import { useCurrentStakedBalance, useCurrentEvmosBalance } from "../../hooks/current-balance.hook";
 import { SlashForm } from "../Form/SlashForm";
 

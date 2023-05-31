@@ -9,6 +9,7 @@ const nextConfig = {
     experimental: {
         appDir: false,
     },
+    basePath: '/easyeigen',
     assetPrefix: './',
     webpack: function (config, options) {
         if (!options.isServer) {

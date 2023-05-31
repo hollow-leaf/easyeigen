@@ -4,28 +4,21 @@ import { useState, useEffect } from 'react';
 import { alpha } from '@mui/material/styles';
 import axios from 'axios';
 import { formatted } from "../../utils/ether-big-number";
+import validatorJson from '../../utils/validators.json'
 
 export function ValidatorsDisplay() {
-    const url: string = 'https://api.mintscan.io/v1/evmos-testnet/validators';
 
     const router = useRouter()
     const [data, setData] = useState<any>()
     useEffect(() => {
-        const response = axios.get(url);
-        response
-            .then(({ data }) => {
-                const topFiveData = data.slice(0, 5)
-                data = topFiveData.map((el: any, index: any) => {
-                    return {
-                        ...el,
-                        id: index + 1,
-                    }
-                })
-                setData(data)
-            })
-            .catch(e => {
-                console.log(e)
-            })
+        const topFiveData = validatorJson.slice(0, 5)
+        const data = topFiveData.map((el: any, index: any) => {
+            return {
+                ...el,
+                id: index + 1,
+            }
+        })
+        setData(data)
     }, []
     )
 
