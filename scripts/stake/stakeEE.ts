@@ -18,7 +18,7 @@ async function main () {
 
   // console.log('---------- Deposit & Staking ----------')
   // // Deposit EVMOS
-  let deposit = await stakeContract.deposit({ value: ethAmt })
+  const deposit = await stakeContract.deposit({ value: ethAmt })
   await deposit.wait()
   console.log(`Deposit ${etherAmount} EVMOS success`)
 

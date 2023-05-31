@@ -13,7 +13,7 @@ async function main () {
 
   const value = await restakeContract.getRelayer(await wallet.getAddress())
   console.log(value)
- 
+
   const circuitInputs = {
     relayer: value[0].toString(),
     receiver: value[1].toString(),

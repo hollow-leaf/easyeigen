@@ -101,7 +101,9 @@ contract Restake is Ownable {
     }
 
     // query
-
+    function checkRelayer(address relayer) public view returns (bool) {
+        return registered[relayer];
+    }
     function getRelayer(address relayer) public view returns (uint[4] memory) {
         return relayProofs[relayer];
     }

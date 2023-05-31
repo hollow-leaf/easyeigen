@@ -13,19 +13,6 @@ async function main () {
   const relay = await restakeContract.relay(wallet.address, wallet.address, 50, 1) // fake proof
   await relay.wait()
   console.log('Relay success')
-
-  const circuitInputs = {
-    relayer: `${relayer}`,
-    receiver: `${receiver}`,
-    amount: `${amount}`,
-    hash: `0x1`,
-  }
-
-  const proofData = await generateProof(
-    circuitInputs,
-    WASM_FILE_PATH,
-    ZKEY_FILE_PATH
-  )
 }
 
 main().catch((err) => {
