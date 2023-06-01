@@ -1,6 +1,6 @@
 import { BytesLike, ethers } from 'ethers'
 import { config as dotenvConfig } from 'dotenv'
-import { restakerABI, restakerAddress, stakerABI } from '../config'
+import { restakerABI, restakerAddress, stakerABI, stakerAddress } from '../config'
 import { resolve } from 'path'
 import { sleep } from '../utils/helpers'
 dotenvConfig({ path: resolve(__dirname, '../../.env') })
@@ -10,7 +10,7 @@ async function main () {
 
   const wallet = new ethers.Wallet(process.env.PRIVATE_KEY as BytesLike, evmos)
   const restakeContract = new ethers.Contract(restakerAddress.main, restakerABI.abi, wallet)
-  const stakeContract = new ethers.Contract('0xda4c3028d22290B337D9bd46B10F8C2522694600', stakerABI.abi, wallet)
+  const stakeContract = new ethers.Contract(stakerAddress.main, stakerABI.abi, wallet)
 
   let eevmosBalance = await stakeContract.balanceOf(await wallet.getAddress())
   console.log('EEVMOS Balance', ethers.utils.formatEther(eevmosBalance.toString()), '(before restaking)')
