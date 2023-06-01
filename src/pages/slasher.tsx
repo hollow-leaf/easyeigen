@@ -1,7 +1,6 @@
 import { Button, Grid, TextField } from "@mui/material"
 import { prepareWriteContract, writeContract } from '@wagmi/core'
 import { useState } from "react"
-import { RestakeCard } from "../components/Card/RestakeCard"
 import { SlasherCard } from "../components/Card/SlasherCard"
 import { useStEvmosContractAddressHook } from "../hooks/useContractAddress.hook"
 
