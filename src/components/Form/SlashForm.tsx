@@ -13,7 +13,6 @@ export function SlashForm({
 }: any) {
   const [address, setAddress] = useState('')
   const [loading, setLoading] = useState(false)
-  const [merkle, setMerkle] = useState('')
   const registerRelayerAddresses = useRelayerContractAddressHook()
 
   async function slash ( relayerAddress : string) {
@@ -82,7 +81,7 @@ export function SlashForm({
             <Button
               variant="contained"
               disabled={loading}
-              color="warning"
+              color="error"
               style={{
                 textTransform: 'none',
               }}

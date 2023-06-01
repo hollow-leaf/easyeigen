@@ -17,11 +17,11 @@ const theme = createTheme({
             main: '#f7f7f7',
         },
         secondary: {
-            main: '#f7f7f7',
+            main: '#bdbdbd',
         },
         error: {
             // This is green.A700 as hex.
-            main: '#bdbdbd',
+            main: '#ef5350',
         },
     },
 });

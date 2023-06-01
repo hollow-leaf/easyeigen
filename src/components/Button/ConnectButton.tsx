@@ -7,7 +7,7 @@ export function ConnectButton ({children}: any) {
         {({ isConnected, isConnecting, show, hide, address, ensName, chain }) => {
           return (
             <Button 
-              color={isConnected ? 'error' : 'primary'}
+              color={isConnected ? 'secondary' : 'primary'}
               onClick={show}
             >
               {

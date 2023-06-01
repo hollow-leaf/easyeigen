@@ -73,7 +73,6 @@ export function ProcessButton({ method, disabled, reverse, valAddress, balance }
         <Button
           variant="contained"
           disabled={writing}
-          disableElevation
           color="success"
           style={{
             textTransform: 'none',
@@ -97,7 +96,6 @@ export function ProcessButton({ method, disabled, reverse, valAddress, balance }
         </Button>
       }
       <LoadingDialog open={writing}/>
-
     </>
   )
 }
