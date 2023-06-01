@@ -1,6 +1,7 @@
 /** @type {import('next').NextConfig} */
 
-const isProd = 'production'
+const isProd = process.env.NODE_ENV !== 'development'
+
 const nextConfig = {
     output: 'export',
     images: {
@@ -9,7 +10,7 @@ const nextConfig = {
     experimental: {
         appDir: false,
     },
-    basePath: '/easyeigen',
+    basePath: isProd ? '/easyeigen' : '',
     assetPrefix: './',
     webpack: function (config, options) {
         if (!options.isServer) {

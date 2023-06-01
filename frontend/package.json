@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": false,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build && next export && touch out/.nojekyll",
+    "dev": "export NODE_ENV=development && next dev",
+    "build": "export NODE_ENV=production && next build && next export && touch out/.nojekyll",
     "start": "next start",
     "lint": "next lint"
   },
