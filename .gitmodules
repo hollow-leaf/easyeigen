@@ -1,0 +1,4 @@
+[submodule "frontend"]
+	path = frontend
+	url = git@github.com:kidneyweakx/easyeigen.git
+	branch = web

@@ -23,3 +23,16 @@ npm run deploy:EasySlasher
 # slash
 npm run slash
 ```
+
+### Submodule
+Init
+
+```bash
+git submodule update --init --recursive
+```
+
+Update
+
+```bash
+git submodule update --remote
+```
