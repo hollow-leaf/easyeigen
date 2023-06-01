@@ -1,6 +1,7 @@
 {
   "name": "easyeigen-frontend",
   "version": "0.1.0",
+  "license": "Apache-2.0",
   "private": false,
   "scripts": {
     "dev": "export NODE_ENV=development && next dev",
