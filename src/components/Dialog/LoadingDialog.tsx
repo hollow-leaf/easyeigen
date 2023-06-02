@@ -3,6 +3,7 @@ import { Box, CircularProgress, Dialog, DialogContent, DialogTitle, LinearProgre
 import { useEffect } from "react";
 
 export function LoadingDialog ({
+  title = 'Transaction Confirming...',
   open,
 }: any) {
   return (
@@ -10,7 +11,7 @@ export function LoadingDialog ({
       open={open}
     > 
       <DialogTitle>
-        Transaction Confirming...
+        {title}
       </DialogTitle>
       <DialogContent>
         <LinearProgress/>

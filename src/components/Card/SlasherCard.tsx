@@ -18,12 +18,6 @@ export function SlasherCard(
     const [balance, setBalance] = useState(useCurrentEvmosBalance())
     const [isWithdraw, setProcess] = useState(0)
     const [amount, setAmount] = useState(0)
-    const { data: any } = useContractRead({
-        address: stEvmosAddresses,
-        abi: stakerABI,
-        functionName: 'allowance',
-        args: [address!, stEvmosAddresses]
-    })
 
     return (
         <Card

@@ -14,9 +14,15 @@ export function SlashForm({
   const [address, setAddress] = useState('')
   const [loading, setLoading] = useState(false)
   const registerRelayerAddresses = useRelayerContractAddressHook()
+  const [proof, setProof] = useState<any[]>([]);
+  const [isProofExist, setProofCheck] = useState(false);
+  
+  useEffect(()=>{
+    const proofExist = proof.length !== 0
+    setProofCheck(proofExist)
+  },[proof])
 
-  async function slash ( relayerAddress : string) {
-    
+  async function getProof( relayerAddress : string ){
     setLoading(true)
     const value:any = await readContract({
       address: registerRelayerAddresses,
@@ -24,8 +30,6 @@ export function SlashForm({
       functionName: 'getRelayer',
       args:[relayerAddress]
     })
-
-    console.log('value:',value[0])
 
       const circuitInputs = {
       relayer: value[0].toString(),
@@ -37,23 +41,28 @@ export function SlashForm({
     const proofData = await generateProof(
       circuitInputs
     )
-    console.log('proof:', proofData)
+    setProof(proofData)
+  }
+  
+  async function slash ( relayerAddress : string) {
+    setLoading(true)
     const config = await prepareWriteContract({
       address: registerRelayerAddresses,
       abi: relayerABI,
       functionName: 'slash',
-      args:[proofData, relayerAddress]
+      args:[proof, relayerAddress]
     })
     const {hash:registerHash} = await writeContract(config)
     await waitForTransaction({
       hash: registerHash,
     })
+
   }
 
   return (
     <>
-      <Grid container rowSpacing={4} justifyContent="center">
-        <Grid container item alignItems={'center'} justifyContent="center" sx={{ padding: '0 0 20px 0' }}>
+      <Grid container rowSpacing={2} justifyContent="center">
+        <Grid container item alignItems={'center'} justifyContent="center" sx={{ padding: '0 0 0 0' }}>
                   <div style={{ display: 'flex' }}>
                       <Typography display={'inline-block'} sx={{
                           fontSize: '20px'
@@ -62,6 +71,16 @@ export function SlashForm({
                       </Typography>
                   </div>
               </Grid>
+        <Grid container item alignItems={'center'} justifyContent="center" sx={{ padding: '0 0 0 0' }}>
+          <div style={{ display: 'flex' }}>
+            <Typography display={'inline-block'} sx={{
+              fontSize: '20px'
+            }}>
+              {!isProofExist ? '1. You need to generate proof first.' : '2. You can try to slashing relayer.'}
+              
+            </Typography>
+          </div>
+        </Grid>
         <Grid container item>
           <TextField
             type="string"
@@ -81,7 +100,7 @@ export function SlashForm({
             <Button
               variant="contained"
               disabled={loading}
-              color="error"
+              color= {!isProofExist ? 'info' : 'error'}
               style={{
                 textTransform: 'none',
               }}
@@ -89,24 +108,27 @@ export function SlashForm({
                 width: '120px',
               }}
               onClick={() => {
-                slash(address)
-                  .finally(() => {
-                  setLoading(false)
-                })
+                if(proof.length === 0){
+                  getProof(address)
+                      .finally(() => {
+                      setLoading(false)
+                    })
+                }else{
+                  slash(address)
+                    .finally(() => {
+                    setLoading(false)
+                  })
+                }
               }}
             >
-              {
-                loading ? (
-                  <>
-                    Slash Checking...
-                  </>)
-                  : 'Slash'
-              }
+              {!isProofExist ? 'Generate' : 'Slash'}
             </Button>
           </Grid>
         </Grid>
       </Grid>
-      <LoadingDialog open={loading}/>
+      <LoadingDialog 
+        open={loading} 
+        title={!isProofExist ? 'Generating Proof....' : 'Slashing...'}/>
     </>
   )
 }

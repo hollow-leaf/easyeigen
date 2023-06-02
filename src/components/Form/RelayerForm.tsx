@@ -77,7 +77,6 @@ export function RelayerForm({
       functionName: 'registered',
       args:[address]
     })
-    console.log(!!data)
     setIsRelayer(!!data)
   }
 
