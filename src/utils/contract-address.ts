@@ -7,7 +7,7 @@ export const stEvmosAddresses = {
   "Polygon Mumbai": "",
   "Scroll Alpha": "",
   "Sepolia": "",
-  "Evmos Testnet": "0xda4c3028d22290B337D9bd46B10F8C2522694600",
+  "Evmos Testnet": "0x42C5d61A1bCafeD5150c58d6274F6244E23441a9",
 }
 
 export const registerRelayerAddresses = {
@@ -19,6 +19,6 @@ export const registerRelayerAddresses = {
   "Polygon Mumbai": "",
   "Scroll Alpha": "",
   "Sepolia": "",
-  "Evmos Testnet": "0x7eb88f14f90d86c5F28fD918Fad8620941c9f65B",
+  "Evmos Testnet": "0xE8104407214415e5775e3643CAb2579b80712472",
 
 }
