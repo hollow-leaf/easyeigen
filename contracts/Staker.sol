@@ -3,8 +3,8 @@ pragma solidity >=0.8.17;
 
 import "./precompiles/stateful/Staking.sol";
 import "./precompiles/stateful/Distribution.sol";
-import "../node_modules/@openzeppelin/contracts/token/ERC20/ERC20.sol";
-import "../node_modules/@openzeppelin/contracts/token/ERC20/extensions/ERC20Burnable.sol";
+import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Burnable.sol";
 
 contract Staker is ERC20{
     string[] private stakingMethods = [MSG_DELEGATE];

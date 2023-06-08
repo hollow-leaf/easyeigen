@@ -9,8 +9,8 @@ async function main () {
   const evmos = new ethers.providers.JsonRpcProvider(process.env.EVMOS_RPC_URL)
 
   const wallet = new ethers.Wallet(process.env.PRIVATE_KEY as BytesLike, evmos)
-  // const stakeContract = new ethers.Contract(stakerAddress.main, stakerABI.abi, wallet)
-  const stakeContract = new ethers.Contract('0xda4c3028d22290B337D9bd46B10F8C2522694600', stakerABI.abi, wallet)
+  const stakeContract = new ethers.Contract(stakerAddress.main, stakerABI.abi, wallet)
+  // const stakeContract = new ethers.Contract('0xda4c3028d22290B337D9bd46B10F8C2522694600', stakerABI.abi, wallet)
 
   const nodeStake = 'evmosvaloper10t6kyy4jncvnevmgq6q2ntcy90gse3yxa7x2p4'
   const etherAmount = '10'

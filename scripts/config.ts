@@ -3,7 +3,7 @@ import stakerABI from '../artifacts/contracts/Staker.sol/Staker.json'
 import restakerABI from '../artifacts/contracts/Restake.sol/Restake.json'
 // import restakerAddress from '../scripts/address/tevmos/Restake.json'
 
-const stakerAddress = { main: '0xda4c3028d22290B337D9bd46B10F8C2522694600' }
-const restakerAddress = { main: '0x7eb88f14f90d86c5F28fD918Fad8620941c9f65B' }
+const stakerAddress = { main: '0x42C5d61A1bCafeD5150c58d6274F6244E23441a9' }
+const restakerAddress = { main: '0xE8104407214415e5775e3643CAb2579b80712472' }
 
 export { stakerABI, stakerAddress, restakerABI, restakerAddress }
