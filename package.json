@@ -15,7 +15,7 @@
     "verify": "hardhat verify:contract",
     "deploy:zk": "hardhat deploy:contract --contract Verifier --network tevmos",
     "deploy:Staker": "hardhat deploy:contract --contract Staker --network tevmos",
-    "deploy:Restake": "hardhat deploy:contract --contract Restake --network tevmos",
+    "deploy:Restake": "hardhat deploy:restake --contract Restake --network tevmos",
     "circom:dev": "hardhat circom --deterministic --debug --verbose",
     "eslint": "eslint -c .eslintrc \"./**/*.ts\"",
     "eslint:fix": "eslint --fix \"./src/*.ts\""

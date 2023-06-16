@@ -10,10 +10,11 @@ async function main () {
 
   const wallet = new ethers.Wallet(process.env.PRIVATE_KEY as BytesLike, evmos)
   const stakeContract = new ethers.Contract(stakerAddress.main, stakerABI.abi, wallet)
+  console.log('stakeAddr', stakerAddress.main)
   // const stakeContract = new ethers.Contract('0xda4c3028d22290B337D9bd46B10F8C2522694600', stakerABI.abi, wallet)
 
   const nodeStake = 'evmosvaloper10t6kyy4jncvnevmgq6q2ntcy90gse3yxa7x2p4'
-  const etherAmount = '10'
+  const etherAmount = '0.1'
   const ethAmt = ethers.utils.parseEther(etherAmount)
 
   // console.log('---------- Deposit & Staking ----------')
@@ -24,11 +25,13 @@ async function main () {
 
   let eevmosBalance = await stakeContract.balanceOf(await wallet.getAddress())
   console.log('EEVMOS Balance', ethers.utils.formatEther(eevmosBalance.toString()), '(before staking)')
+  console.log('Contract Balance', ethers.utils.formatEther((await evmos.getBalance(stakeContract.address)).toString()))
+  console.log('Wallet Deposit Balance', ethers.utils.formatEther((await stakeContract.deposits(await wallet.getAddress())).toString()))
   await sleep(12000)
 
   // // Stake EVMOS then get EEVMOS
-  const estStakeDeposit = await stakeContract.estimateGas.staking(nodeStake, ethAmt)
-  const stakeDeposit = await stakeContract.staking(nodeStake, ethAmt, { gasLimit: estStakeDeposit })
+  // const estStakeDeposit = await stakeContract.estimateGas.staking(nodeStake, ethAmt)
+  const stakeDeposit = await stakeContract.staking(nodeStake, ethAmt)
   await stakeDeposit.wait()
   console.log(`Stake ${etherAmount} EVMOS success`)
 

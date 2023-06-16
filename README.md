@@ -7,12 +7,12 @@ EasyEigen Factory is a project inspire from  Eigen Layer Restaking Solution. We 
 ---
 ## Demo Link
 
-Staker EEVMOS Contract: [`0x42C5d61A1bCafeD5150c58d6274F6244E23441a9`](https://testnet.escan.live/address/0x42C5d61A1bCafeD5150c58d6274F6244E23441a9#code)
+Staker EEVMOS Contract: [`0x4333B9f66eD8b7A1B6B1EA93Ce984F6dEf2b6545`](https://testnet.escan.live/address/0x4333B9f66eD8b7A1B6B1EA93Ce984F6dEf2b6545#code)
 
 ZK verifier:
 [`0x9C6603BB1F5a9781C9E2Bc5131189557aA350b81`](https://testnet.escan.live/address/0x9C6603BB1F5a9781C9E2Bc5131189557aA350b81#code)
 
-Restake Contract & Cross-Chain: [`0xE8104407214415e5775e3643CAb2579b80712472`](https://testnet.escan.live/address/0xE8104407214415e5775e3643CAb2579b80712472#code)
+Restake Contract & Cross-Chain: [`0x3B5Fbdeb7A99Bda0428b83776F1728f82b7671c4`](https://testnet.escan.live/address/0x3B5Fbdeb7A99Bda0428b83776F1728f82b7671c4#code)
 
 EasyEigen Factory Github: [github.com/kidneyweakx/easyeigen](https://github.com/kidneyweakx/easyeigen)
 

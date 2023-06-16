@@ -13,15 +13,17 @@ contract Staker is ERC20{
     constructor () ERC20("EEVMOS", "EE") {}
 
     function approveRequiredMethods() public {
+        string[] memory allowedList = new string[](0); // Defaults to tx.origin when empty
         bool success = STAKING_CONTRACT.approve(
-            msg.sender,
+            address(this),
             type(uint256).max,
             stakingMethods
         );
         require(success, "Failed to approve delegate method");
         success = DISTRIBUTION_CONTRACT.approve(
-            msg.sender,
-            distributionMethods
+            address(this),
+            distributionMethods,
+            allowedList
         );
         require(success, "Failed to approve withdraw delegator rewards method");
     }
@@ -34,10 +36,10 @@ contract Staker is ERC20{
     function staking (
         string memory _validatorAddr,
         uint256 _amount
-    ) public returns (int64 completionTime){
+    ) public returns (bool success){
         require(_amount <= deposits[msg.sender], "Insufficient balance");
         deposits[msg.sender] -= _amount;
-        completionTime = STAKING_CONTRACT.delegate(address(this), _validatorAddr, _amount);
+        success = STAKING_CONTRACT.delegate(address(this), _validatorAddr, _amount);
         _mint(msg.sender, _amount);
     }
 
