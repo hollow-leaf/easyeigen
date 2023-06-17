@@ -25,11 +25,11 @@ export const makeChain = (name: string, rpc: string, id: number) => {
   }
 }
 const defaultChains: Chain[] = [
+  makeChain('Evmos Testnet', 'https://jsonrpc-t.evmos.nodestake.top/', 9000),
+  makeChain('Evmos', 'https://eth.bd.evmos.org:8545', 9001),
   goerli,
   sepolia,
   gnosisChiado,
-  makeChain('Evmos', 'https://eth.bd.evmos.org:8545', 9001),
-  makeChain('Evmos Testnet', 'https://eth.bd.evmos.dev:8545', 9000),
 ];
 
 const { chains, provider, webSocketProvider } = configureChains(

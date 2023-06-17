@@ -321,9 +321,9 @@ export const stakerABI = [
     "name": "staking",
     "outputs": [
       {
-        "internalType": "int64",
-        "name": "completionTime",
-        "type": "int64"
+        "internalType": "bool",
+        "name": "success",
+        "type": "bool"
       }
     ],
     "stateMutability": "nonpayable",
@@ -421,7 +421,7 @@ export const stakerABI = [
         "type": "uint256"
       }
     ],
-    "name": "unstakeTokens",
+    "name": "unstaking",
     "outputs": [
       {
         "internalType": "int64",
@@ -429,6 +429,19 @@ export const stakerABI = [
         "type": "int64"
       }
     ],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_amount",
+        "type": "uint256"
+      }
+    ],
+    "name": "withdraw",
+    "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
   },
